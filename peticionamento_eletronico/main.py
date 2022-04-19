@@ -3,14 +3,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from easygui import *
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import date
 import os
 from pathlib import Path
 import pyautogui
 
-navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # SET NAVEGADOR
 
+navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # SET NAVEGADOR
 navegador.implicitly_wait(5)
 
 # DADOS
@@ -62,7 +63,6 @@ if not lote:  # PARA PROTOCOLO INDIVIDUALIZADO
         navegador.find_element_by_xpath('//*[@id="tr0"]').click()  # SELECIONA PERFIL ADVOGADO
         sleep(1.5)
         return 1
-
 
     acessoEproc()
 
@@ -142,13 +142,12 @@ if not lote:  # PARA PROTOCOLO INDIVIDUALIZADO
     sleep(1)
     navegador.find_element_by_xpath('//*[@id="txtEvento"]').send_keys(Keys.ENTER)  # DÁ UM ENTER PRA SALVAR O EVENTO
     sleep(2)
-    #botao_anexo = navegador.find_element_by_xpath('input.qq-upload-input')
-    #botao_anexo.click()
-
+    navegador.find_element(by=By.XPATH, value=f'//*[@id="{processo}_1"]/div/div[2]').click()
+    sleep(2)
 
     def ordenacao():
-        arquivos = ['01-kkka.pdf', '02-ugheeag.pdf', '03-teste.pdf', '04-eea.pdf', '10-iaaia.pdf', '11-atena.pdf',
-                    '12-kkal.pdf', '5-jajaja.pdf', '6-aa.pdf', '7-aegu.pdf', '8-auigha.pdf', '9-apolo.pdf']
+        p = Path(f'./PROTOCOLO/{processo} - {data_em_texto}')
+        arquivos = [x.name for x in p.iterdir() if x.is_file()]
         arquivos_format = []
         for x in arquivos:
             arquivos_format.append('"' + x + '"')
@@ -169,14 +168,20 @@ if not lote:  # PARA PROTOCOLO INDIVIDUALIZADO
                     dados_ordenados.append(item[0])
         print(f'Resultado: {dados_ordenados}')
         dados_ordenados_str = ' '.join(dados_ordenados)
-        return dados_ordenados_str
-#    ordenacao()
+        cwd = Path.cwd()
+        full_path = cwd.joinpath(p)
+        full_path = str(full_path)
+        return full_path, dados_ordenados_str
+    ordenacao()
 
 
     def anexa_documentos():
-        pasta = os.getcwd() + '/PROTOCOLO/' + processo + '-' + data_em_texto + '/'
-        pastaAtual = Path(pasta)
-        filePathFormat = str(pastaAtual)
+        pyautogui.write(ordenacao()[0])
+        pyautogui.press('enter')
         sleep(1.5)
-        pyautogui.write(str(filePathFormat + ordenacao()))
-    # anexa_documentos()
+        pyautogui.write(ordenacao()[1])
+        sleep(1)
+        pyautogui.press('enter')
+    anexa_documentos()
+
+msgbox('Processo finalizado. Por favor, classifique os documentos e protocole a peça')
