@@ -322,7 +322,7 @@ dicionario = {'ID': cj_id_intimacoes,
               'Clientes': cj_clientes,
               'Descrição': cj_descricoes,
               'Evento ref': cj_eventos,
-               'Intimação': cj_notas ,
+               'Intimação': cj_notas,
               # 'Destinatários':
               }      #ARMAZENA OS VALORES EM UMA MATRIZ
 df = pd.DataFrame(dicionario)        #CRIA O DATAFRAME
