@@ -85,7 +85,10 @@ sleep(0.5)
 navegador.find_element(by=By.XPATH, value=
 '//*[@id="container-principal"]/app-signin/div[3]/div[2]/div/form/button').click()  # BOTAO ENTRAR
 sleep(1.5)
-navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button/span').click()
+try:
+    navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button/span').click()
+except NoSuchElementException:
+    pass
 sleep(0.5)
 navegador.find_element(by=By.XPATH, value='//*[@id="supportedContentDropdownProcesso"]/span').click()
 sleep(0.5)
@@ -145,7 +148,10 @@ for i in range(0, total_linhas):
     cj_processoFormatado.append(processoFormatado)  # ARMAZENA NA LISTA O NUMERO DO PROCESSO FORMATADO
 
     sleep(4)
-    navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button').click()
+    try:
+        navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button').click()
+    except NoSuchElementException:
+        pass
     sleep(0.5)
     navegador.find_element(by=By.XPATH, value='//*[@id="supportedContentDropdownProcesso"]/span').click()
     sleep(0.5)
@@ -177,19 +183,18 @@ if boolbox(message, title, ["Sim", "Não"]):
 else:
     atualiza = 'nao'
 
+# Tratamento base de dados — desdobramentos
 desdobramentos = pd.read_excel('relatorio_desdobramentos.xlsx')
+colunas_tabela = list(desdobramentos.columns)
+colunas_novas = list(desdobramentos.iloc[2])
+dici = {}
+for x in range(len(colunas_tabela)):
+    dici[colunas_tabela[x]] = colunas_novas[x]
+desdobramentos.rename(columns=dici, inplace=True)
+desdobramentos.drop(axis=0, index=[0, 1, 2], inplace=True)
 
 
 def atualiza_base_de_dados():
-    colunas_tabela = list(desdobramentos.columns)
-    colunas_novas = list(desdobramentos.iloc[2])
-    dici = {}
-    for x in range(len(colunas_tabela)):
-        dici[colunas_tabela[x]] = colunas_novas[x]
-    desdobramentos.rename(columns=dici, inplace=True)
-    desdobramentos.drop(axis=0, index=[0, 1, 2], inplace=True)
-    desdobramentos.head()
-
     pastas_unicas = set(desdobramentos['Pasta do processo'])
     nova_pasta = []
     for unico in pastas_unicas:
