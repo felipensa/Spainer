@@ -161,7 +161,7 @@ for i in range(0, total_linhas):
 df_scraping = {'Principal': cj_processo, 'Número antigo': cj_num_antigo, 'Originário': cj_num_originario,
                'Processo Formatado': cj_processoFormatado}  # ARMAZENA OS VALORES EM UMA MATRIZ
 scraping = pd.DataFrame(df_scraping,
-                        columns=['Processo', 'Antigo', 'Originário', 'Processo Formatado'])  # CRIA O DATAFRAME
+                        columns=['Principal', 'Antigo', 'Originário', 'Processo Formatado'])  # CRIA O DATAFRAME
 scraping.to_excel('./PROCESSOS ATUALIZADOS.xlsx')
 
 navegador.quit()
@@ -229,7 +229,7 @@ for proc_format in scraping['Processo Formatado']:
                                                                     'Pasta deste desdobramento'],
                                                  'originario_principal'))
 resultado_consulta = pd.DataFrame(consulta_originario_no_principal)
-
+resultado_consulta.to_excel('Resultado consulta.xlsx')
 print(f'{len(consulta_originario_no_principal)} processos com número ORIGINÁRIO cadastrados no PRINCIPAL')
 
 
@@ -242,6 +242,6 @@ wb = load_workbook('exemplo.xlsx')
 ws = wb.active
 for r in dataframe_to_rows(resultado_consulta, index=False, header=False):
     ws.append(r)
+    print(r)
 
-print(r)
 wb.save(f"Processos correção PPE - {datetime.today().strftime('%d-%m-%y')}.xlsx")
