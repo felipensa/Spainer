@@ -85,10 +85,10 @@ sleep(0.5)
 navegador.find_element(by=By.XPATH, value=
 '//*[@id="container-principal"]/app-signin/div[3]/div[2]/div/form/button').click()  # BOTAO ENTRAR
 sleep(1.5)
-try:
-    navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button/span').click()
-except NoSuchElementException:
-    pass
+#try:
+#    navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button/span').click()
+#except:
+#    pass
 sleep(0.5)
 navegador.find_element(by=By.XPATH, value='//*[@id="supportedContentDropdownProcesso"]/span').click()
 sleep(0.5)
@@ -127,13 +127,13 @@ for i in range(0, total_linhas):
             navegador.find_element(by=By.XPATH, value='//*[@id="bt_pesquisar"]').click()  # BOTÃO PESQUISAR
             sleep(2)
     sleep(10)
-    print(f"o robô procurou {tentativas} vezes.")
+    print(f"o robô procurou {tentativas} vez(es).")
     # COLETA NUMERO ANTIGO E NUMERO ORIGINÁRIO
     try:
         num_antigo = navegador.find_element(by=By.XPATH,
                                             value='//*[@id="campoDetalhesProcesso"]/div[1]/div[2]/span').text
     except NoSuchElementException:
-        num_antigo = 'Sem numero antigo'
+        num_antigo = ' '
 
     try:
         num_originario = navegador.find_element(by=By.XPATH, value=
@@ -148,10 +148,10 @@ for i in range(0, total_linhas):
     cj_processoFormatado.append(processoFormatado)  # ARMAZENA NA LISTA O NUMERO DO PROCESSO FORMATADO
 
     sleep(4)
-    try:
-        navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button').click()
-    except NoSuchElementException:
-        pass
+#    try:
+#        navegador.find_element(by=By.XPATH, value='//*[@id="navBar"]/button').click()
+#    except:
+#        pass
     sleep(0.5)
     navegador.find_element(by=By.XPATH, value='//*[@id="supportedContentDropdownProcesso"]/span').click()
     sleep(0.5)
@@ -160,8 +160,9 @@ for i in range(0, total_linhas):
 
 df_scraping = {'Principal': cj_processo, 'Número antigo': cj_num_antigo, 'Originário': cj_num_originario,
                'Processo Formatado': cj_processoFormatado}  # ARMAZENA OS VALORES EM UMA MATRIZ
+
 scraping = pd.DataFrame(df_scraping,
-                        columns=['Principal', 'Antigo', 'Originário', 'Processo Formatado'])  # CRIA O DATAFRAME
+                        columns=['Principal', 'Número antigo', 'Originário', 'Processo Formatado'])  # CRIA O DATAFRAME
 scraping.to_excel('./PROCESSOS ATUALIZADOS.xlsx')
 
 navegador.quit()
@@ -175,13 +176,7 @@ print(scraping)
 ## Preparação relatório desdobramentos
 """
 
-"""## Atualizar base de dados"""
-message = "Atualizar base de dados"
-title = "Base de dados"
-if boolbox(message, title, ["Sim", "Não"]):
-    atualiza = 'sim'
-else:
-    atualiza = 'nao'
+
 
 # Tratamento base de dados — desdobramentos
 desdobramentos = pd.read_excel('relatorio_desdobramentos.xlsx')
@@ -200,15 +195,17 @@ def atualiza_base_de_dados():
     for unico in pastas_unicas:
         numero = list(desdobramentos['Pasta do processo']).count(unico) + 1
         if numero < 10:
-            nova_pasta.append(unico + '.0' + str(numero))
+            nova_pasta.append((unico + '.0' + str(numero), unico))
+
         else:
-            nova_pasta.append(unico + '.' + str(numero))
+            nova_pasta.append((unico + '.' + str(numero), unico))
     return nova_pasta
 
 
-if atualiza == 'sim':
-    atualiza_base_de_dados()
-
+# Atualiza Base de Dados
+novas_pastas = atualiza_base_de_dados()
+novas_pastas = pd.DataFrame(novas_pastas, columns=['Nova Pasta', 'Pasta'])
+print('pastas novas: ', novas_pastas)
 resultado_scraping = pd.read_excel('PROCESSOS ATUALIZADOS.xlsx')
 
 """## Consultar base de dados"""
@@ -219,15 +216,26 @@ consulta_originario_no_principal = []
 for proc_format in scraping['Processo Formatado']:
     indice_principal = scraping.index[scraping['Processo Formatado'] == proc_format].tolist()
     originario = scraping.loc[indice_principal[0], 'Originário']
-    indice_originario = scraping.index[scraping['Originário'] == originario].tolist()
+    indice_originario_principal = desdobramentos.index[desdobramentos['Número CNJ'] == originario].tolist()
+    indice_pasta = novas_pastas.index[novas_pastas['Nova Pasta'] == desdobramentos.loc[indice_originario_principal[0], 'Pasta deste desdobramento'][:-3]].tolist()[0]
+    print('indice da pasta: ', indice_pasta)
+    #indice_originario = scraping.index[scraping['Originário'] == originario].tolist()
 
     if originario in list(desdobramentos['Número CNJ']) and proc_format not in list(desdobramentos['Número CNJ']):
-        indice_originario_principal = desdobramentos.index[desdobramentos['Número CNJ'] == originario].tolist()
-        consulta_originario_no_principal.append((scraping['Principal'][indice_originario[0]],
-                                                 scraping['Originário'][indice_originario[0]],
-                                                 desdobramentos.loc[indice_originario_principal[0],
-                                                                    'Pasta deste desdobramento'],
-                                                 'originario_principal'))
+        consulta_originario_no_principal.append((desdobramentos.loc[indice_originario_principal[0],'Pasta deste desdobramento'][:-3],
+                                                 novas_pastas['Nova Pasta'](indice_pasta[0]),
+                                                 scraping['Número antigo'][indice_principal[0]],
+                                                 scraping['Processo Formatado'][indice_principal[0]],
+                                                 'AJUSTAR',
+                                                 'AJUSTAR',
+                                                 'Tribunal de Justiça do Rio Grande do Sul',
+                                                 'AJUSTAR',
+                                                 'Barbieri Advogados',
+                                                 'Barbieri Advogados',
+                                                 'Barbieri Advogados',
+                                                 'Barbieri Advogados'))
+
+
 resultado_consulta = pd.DataFrame(consulta_originario_no_principal)
 resultado_consulta.to_excel('Resultado consulta.xlsx')
 print(f'{len(consulta_originario_no_principal)} processos com número ORIGINÁRIO cadastrados no PRINCIPAL')
@@ -240,8 +248,13 @@ print(f'{len(consulta_originario_no_principal)} processos com número ORIGINÁRI
 
 wb = load_workbook('exemplo.xlsx')
 ws = wb.active
-for r in dataframe_to_rows(resultado_consulta, index=False, header=False):
-    ws.append(r)
-    print(r)
+row = ws.max_row + 1
 
-wb.save(f"Processos correção PPE - {datetime.today().strftime('%d-%m-%y')}.xlsx")
+for r in dataframe_to_rows(resultado_consulta, index=False, header=False):
+    for col, entry in enumerate(r, start=1):
+        ws.cell(row=row, column=col, value=entry)
+        print(f'coluna: {col}; valor: {entry}')
+    row += 1
+
+wb.save(f"Processos correção PPE - {datetime.today().strftime('%d%m%y')}.xlsx")
+wb.close()
