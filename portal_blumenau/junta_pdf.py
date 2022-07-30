@@ -1,4 +1,4 @@
-def juntaPDF(matricula):
+def juntaPDF(matricula, ponto_inicial):
     import os
     from PyPDF2 import PdfFileMerger
 
@@ -18,4 +18,5 @@ def juntaPDF(matricula):
     with open("fichas_financeiras " + matricula + ".pdf", "wb") as fout:
         merger.write(fout)
 
+    os.chdir(str(ponto_inicial))
     return 1

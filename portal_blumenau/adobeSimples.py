@@ -1,30 +1,29 @@
-def conversao_excel(navegador, matricula, pasta_downloads):
-    from selenium import webdriver
-    from time import sleep
-    import pyautogui
-    import shutil
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.common.exceptions import TimeoutException
+import sys
+from pathlib import Path
+from time import sleep
+import pyautogui
+import shutil
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
+def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial):
     # ACESSA A PÁGINA DO ADOBE
     link = 'https:/www.adobe.com/br/acrobat/online/pdf-to-excel.html'
     navegador.get(url=link)
     sleep(5)
 
     # PEDE O ARQUIVO DE INPUT
-    navegador.find_element(by=By.CSS_SELECTOR('[class="spectrum-'
-                                              'Button spectrum-Button--cta FileUpload__chooseButton'
-                                              '___ShpZa choose-file"]')).click()
+    navegador.find_element(by=By.XPATH, value='//*[@id="lifecycle-nativebutton"]').click()
     sleep(5)
 
     # INFORMA O ARQUIVO E ORDENA CONVERSÃO
-    caminho = r'.\Fichas ' + matricula
+    caminho = str(pasta_inicial) + r'\Fichas ' + matricula
     pyautogui.write(caminho)
     pyautogui.press('Enter')
-    sleep(1)
+    sleep(2)
     pyautogui.write('fichas_financeiras ' + matricula + '.pdf')
     pyautogui.press('Enter')
     sleep(1)
@@ -40,14 +39,14 @@ def conversao_excel(navegador, matricula, pasta_downloads):
         print("Wait Timed out")
         print(e)
 
-
     # DOWNLOAD
-    navegador.find_element(by=By.CSS_SELECTOR('[class="spectrum-Button spectrum-Button--cta '
-                                              'DownloadOrShare__downloadButton___3z1LR"]')).click()
+    navegador.find_element(by=By.XPATH, value='//*[@id="dc-hosted-ec386752"]/div/'
+                                              'div/div[2]/div/section[2]/div/div[1]/div[2]/button[1]').click()
     sleep(5)
 
     # MOVE ARQUIVO DE DOWNLOADS PARA PASTA ADEQUADA
-    shutil.move(pasta_downloads / f"fichas_financeiras {matricula}.xlsx", './Fichas ' + matricula)
+    shutil.move(str(pasta_downloads) + fr"\fichas_financeiras {matricula}.xlsx",
+                str(pasta_inicial) + fr"\Fichas {matricula}" + fr'\fichas_financeiras {matricula}.xlsx')
 
     navegador.quit()
 
