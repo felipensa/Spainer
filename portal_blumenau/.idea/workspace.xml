@@ -2,12 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33bebb8e-4a31-4694-9ca6-31b64bf43567" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adobeSimples.py" beforeDir="false" afterPath="$PROJECT_DIR$/adobeSimples.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/junta_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/junta_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 141836/ficha financeira 141836 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 141836/ficha financeira 141836 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 141836/fichas_financeiras 141836.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 141836/fichas_financeiras 141836.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 145033/ficha financeira 145033 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 145033/ficha financeira 145033 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 145033/fichas_financeiras 145033.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 145033/fichas_financeiras 145033.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 178942/ficha financeira 178942 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 178942/ficha financeira 178942 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 178942/fichas_financeiras 178942.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 178942/fichas_financeiras 178942.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 184837/ficha financeira 184837 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 184837/ficha financeira 184837 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 184837/fichas_financeiras 184837.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 184837/fichas_financeiras 184837.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 190977/ficha financeira 190977 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 190977/ficha financeira 190977 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 190977/fichas_financeiras 190977.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 190977/fichas_financeiras 190977.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 196614/ficha financeira 196614 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 196614/ficha financeira 196614 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 196614/fichas_financeiras 196614.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 196614/fichas_financeiras 196614.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 201782/ficha financeira 201782 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 201782/ficha financeira 201782 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 201782/fichas_financeiras 201782.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 201782/fichas_financeiras 201782.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 225835/ficha financeira 225835 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 225835/ficha financeira 225835 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 225835/fichas_financeiras 225835.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 225835/fichas_financeiras 225835.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 229644/ficha financeira 229644 2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 229644/ficha financeira 229644 2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 229644/fichas_financeiras 229644.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fichas 229644/fichas_financeiras 229644.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parametros_BluBot.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Parametros_BluBot.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

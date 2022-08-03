@@ -18,7 +18,7 @@ import os
 sys.tracebacklimit = 0
 
 # ARMAZENA OS DADOS
-dataset = pd.read_excel('Parametros_BluBot.xls')
+dataset = pd.read_excel('Parametros_BluBot.xlsx')
 dataset['Ano inicial'] = dataset['Ano inicial'].astype(int)
 print(dataset.dtypes)
 
@@ -56,13 +56,16 @@ for linha in dataset.iterrows():
     navegador.find_element(by=By.XPATH, value='//*[@id="txtNomUsu"]').send_keys(login)
     navegador.find_element(by=By.XPATH, value='//*[@id="txtSenUsu"]').send_keys(senha)
     navegador.find_element(by=By.XPATH, value='//*[@id="submit"]').click()
-    navegador.window_handles[1]
+    navegador.switch_to.window(navegador.window_handles[1])
 
     consulta_janelas = len(navegador.window_handles)
     while consulta_janelas < 3:
         try:
-            WebDriverWait(navegador, 30).until(EC.alert_is_present())
+            print('entrou no try...')
+            WebDriverWait(navegador, 20).until(EC.alert_is_present())
             alert = navegador.switch_to.alert
+            alert_text = alert.text
+            print(alert_text)
             alert.accept()
             print("Falha no login")
             falha = True
