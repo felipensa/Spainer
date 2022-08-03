@@ -20,6 +20,9 @@ sys.tracebacklimit = 0
 # ARMAZENA OS DADOS
 dataset = pd.read_excel('Parametros_BluBot.xlsx')
 dataset['Ano inicial'] = dataset['Ano inicial'].astype(int)
+dataset['Matrícula'] = dataset['Matrícula'].astype(str)
+dataset['Ano final'] = dataset['Ano final'].astype(int)
+
 print(dataset.dtypes)
 
 print('Iniciando iteraçao...')
@@ -39,14 +42,15 @@ for linha in dataset.iterrows():
     matricula = str(linha[1]['Matrícula'])
     login = linha[1]['Login']
     senha = linha[1]['Senha']
-    ano_inicial = linha[1]['Ano inicial']
-    ano_final = linha[1]['Ano final']
+    ano_inicial = int(linha[1]['Ano inicial'])
+    ano_final = int(linha[1]['Ano final'])
+    nome = linha[1]['Nome']
     caminho = linha[1]['Caminho para pasta do cliente']
     periodo = ano_final - ano_inicial + 1
     mes_atual = '12'
 
     # CRIA PASTA DE FICHAS
-    os.mkdir(f'Fichas {matricula}')
+    os.mkdir(f'Fichas {matricula} - {nome}')
 
     # ACESSO PÁGINA
     link = 'https://senior.blumenau.sc.gov.br/restrito/login.htm'
@@ -109,6 +113,23 @@ for linha in dataset.iterrows():
                           'Eve=1-9999&dado_EAbrNEv=0&LINWEB=&dado_EListarRef=S&dado_ENPerIni=01/' + str(ano_inicial) + \
                           '&dado_EDatRef=' + mes_atual + '/' + str(ano_inicial)
         navegador.get(url=link_financeiro)
+
+        try:
+            print('Confere período...')
+            WebDriverWait(navegador, 20).until(EC.alert_is_present())
+            alert = navegador.switch_to.alert
+            alert_text = alert.text
+            print(alert_text)
+            alert.accept()
+            print("Provável aposentadoria ou exoneração")
+            falha_periodo = True
+        except TimeoutException:
+            print("Contracheque disponível!")
+            falha_periodo = False
+
+        if falha_periodo:
+            continue
+
         sleep(3)
 
         # SALVA ARQUIVO
@@ -124,7 +145,7 @@ for linha in dataset.iterrows():
         downloads = Path.home() / "Downloads"
 
         shutil.move(str(downloads) + fr"\ficha financeira {matricula} {ano_inicial}.pdf", str(ponto_inicial) +
-                    r'\Fichas ' + matricula)
+                    rf'\Fichas {matricula} - {nome}')
 
         ano_inicial = int(ano_inicial)
         ano_inicial += 1
@@ -133,12 +154,12 @@ for linha in dataset.iterrows():
     # UNIFICA OS PDFS
     from junta_pdf import juntaPDF
 
-    juntaPDF(matricula, ponto_inicial)
+    juntaPDF(matricula, nome, ponto_inicial)
 
     # CONVERTE O PDF CONSOLIDADO EM EXCEL
     from adobeSimples import conversao_excel
 
-    conversao_excel(navegador, matricula, downloads, ponto_inicial)
+    conversao_excel(navegador, matricula, downloads, ponto_inicial, nome)
 
 # FECHA O NAVEGADOR
 navegador.quit()

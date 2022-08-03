@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 
-def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial):
+def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial, nome):
     # ACESSA A PÁGINA DO ADOBE
     link = 'https:/www.adobe.com/br/acrobat/online/pdf-to-excel.html'
     navegador.get(url=link)
@@ -20,7 +20,7 @@ def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial):
     sleep(5)
 
     # INFORMA O ARQUIVO E ORDENA CONVERSÃO
-    caminho = str(pasta_inicial) + r'\Fichas ' + matricula
+    caminho = str(pasta_inicial) + rf'\Fichas {matricula} - {nome}'
     pyautogui.write(caminho)
     pyautogui.press('Enter')
     sleep(2)
@@ -37,7 +37,6 @@ def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial):
                                         "DownloadOrShare__downloadButton___3z1LR")))
     except TimeoutException as e:
         print("Wait Timed out")
-        print(e)
 
     # DOWNLOAD
     navegador.find_element(by=By.XPATH, value='//*[@id="dc-hosted-ec386752"]/div/'
@@ -46,7 +45,7 @@ def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial):
 
     # MOVE ARQUIVO DE DOWNLOADS PARA PASTA ADEQUADA
     shutil.move(str(pasta_downloads) + fr"\fichas_financeiras {matricula}.xlsx",
-                str(pasta_inicial) + fr"\Fichas {matricula}" + fr'\fichas_financeiras {matricula}.xlsx')
+                str(pasta_inicial) + fr"\Fichas {matricula} - {nome}" + fr'\fichas_financeiras {matricula}.xlsx')
 
     navegador.quit()
 

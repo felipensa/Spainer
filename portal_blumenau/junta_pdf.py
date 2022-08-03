@@ -1,9 +1,9 @@
-def juntaPDF(matricula, ponto_inicial):
+def juntaPDF(matricula, nome, ponto_inicial):
     import os
     from PyPDF2 import PdfFileMerger
 
     # GUARDA O CAMINHO E MUDA O AMBIENTE DO PYTHON PARA TAL PASTA
-    pasta = './Fichas ' + matricula
+    pasta = fr'./Fichas {matricula} - {nome}'
     os.chdir(pasta)
 
     # ARMAZENA OS PDFS INDIVIDUALMENTE
