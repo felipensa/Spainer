@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33bebb8e-4a31-4694-9ca6-31b64bf43567" name="Changes" comment="Atualização na organização das pastas">
+    <list default="true" id="2eadb4ee-69f1-498a-b572-590e54c2bb91" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parametros_BluBot.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parametros_BluBot.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Parametros_BluBot.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,19 +19,19 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2CaLqQ4nl3eaHuj1GAgTrwZW1fI" />
+  <component name="ProjectId" id="2D4tD0P2mmj2Wrpq8trJ5aUVOPY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrador/Documents/GitHub/Spainer/portal_blumenau/main.py&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Administrador/Documents/GitHub/Spainer/portal_blumenau/main.py"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="portal_blumenau" />
@@ -54,35 +58,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="33bebb8e-4a31-4694-9ca6-31b64bf43567" name="Changes" comment="" />
-      <created>1659035938340</created>
+      <changelist id="2eadb4ee-69f1-498a-b572-590e54c2bb91" name="Changes" comment="" />
+      <created>1659970060890</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1659035938340</updated>
+      <updated>1659970060890</updated>
     </task>
-    <task id="LOCAL-00001" summary="Atualização na organização das pastas">
-      <created>1659545393737</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1659545393737</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Atualização na organização das pastas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Atualização na organização das pastas" />
   </component>
 </project>
