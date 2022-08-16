@@ -216,25 +216,29 @@ consulta_originario_no_principal = []
 for proc_format in scraping['Processo Formatado']:
     indice_principal = scraping.index[scraping['Processo Formatado'] == proc_format].tolist()
     originario = scraping.loc[indice_principal[0], 'Originário']
+    print('Originário: ', originario)
     indice_originario_principal = desdobramentos.index[desdobramentos['Número CNJ'] == originario].tolist()
-    indice_pasta = novas_pastas.index[novas_pastas['Nova Pasta'] == desdobramentos.loc[indice_originario_principal[0], 'Pasta deste desdobramento'][:-3]].tolist()[0]
-    print('indice da pasta: ', indice_pasta)
-    #indice_originario = scraping.index[scraping['Originário'] == originario].tolist()
+    if len(indice_originario_principal) >= 1:
+        indice_pasta = novas_pastas.index[novas_pastas['Pasta'] == desdobramentos.loc[indice_originario_principal[0], 'Pasta do processo']].tolist()
+        print('indice pasta: ', indice_pasta)
 
-    if originario in list(desdobramentos['Número CNJ']) and proc_format not in list(desdobramentos['Número CNJ']):
-        consulta_originario_no_principal.append((desdobramentos.loc[indice_originario_principal[0],'Pasta deste desdobramento'][:-3],
-                                                 novas_pastas['Nova Pasta'](indice_pasta[0]),
-                                                 scraping['Número antigo'][indice_principal[0]],
-                                                 scraping['Processo Formatado'][indice_principal[0]],
-                                                 'AJUSTAR',
-                                                 'AJUSTAR',
-                                                 'Tribunal de Justiça do Rio Grande do Sul',
-                                                 'AJUSTAR',
-                                                 'Barbieri Advogados',
-                                                 'Barbieri Advogados',
-                                                 'Barbieri Advogados',
-                                                 'Barbieri Advogados'))
-
+        if originario in list(desdobramentos['Número CNJ']) and proc_format not in list(desdobramentos['Número CNJ']):
+            consulta_originario_no_principal.append((desdobramentos.loc[indice_originario_principal[0],'Pasta deste desdobramento'][:-3],
+                                                     novas_pastas['Nova Pasta'](indice_pasta[0]),
+                                                     scraping['Número antigo'][indice_principal[0]],
+                                                     scraping['Processo Formatado'][indice_principal[0]],
+                                                     'AJUSTAR',
+                                                     'AJUSTAR',
+                                                     'Tribunal de Justiça do Rio Grande do Sul',
+                                                     'AJUSTAR',
+                                                     'Barbieri Advogados',
+                                                     'Barbieri Advogados',
+                                                     'Barbieri Advogados',
+                                                     'Barbieri Advogados'))
+        else:
+            print('Processo não precisa de correção.')
+    else:
+        print('Processo originário não encontrado.')
 
 resultado_consulta = pd.DataFrame(consulta_originario_no_principal)
 resultado_consulta.to_excel('Resultado consulta.xlsx')
