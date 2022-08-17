@@ -39,7 +39,7 @@ for item in selecao:
         selecao_final.append(selecao[cont])
         print(f'Terceiro: {item}')
     else:
-        print('Caso fora do PPE')
+        print('Caso fora do PPE', item)
     cont += 1
 
 cont = 0
@@ -67,6 +67,7 @@ senha = 'sumerios0394'
 total_linhas = len(dados_preparados.index)
 print(dados_preparados)
 print(f'linhas: {total_linhas}')
+
 
 #  NAVEGADOR
 navegador = webdriver.Chrome(ChromeDriverManager().install())
@@ -126,8 +127,9 @@ for i in range(0, total_linhas):
                 processo)  # ENVIA NUMERO PROCESSO PARA CAMPO PESQUISA
             navegador.find_element(by=By.XPATH, value='//*[@id="bt_pesquisar"]').click()  # BOTÃO PESQUISAR
             sleep(2)
-    sleep(10)
-    print(f"o robô procurou {tentativas} vez(es).")
+    sleep(5)
+    print(f"O robô procurou {tentativas} vez(es).")
+
     # COLETA NUMERO ANTIGO E NUMERO ORIGINÁRIO
     try:
         num_antigo = navegador.find_element(by=By.XPATH,
@@ -171,12 +173,9 @@ ctypes.windll.user32.MessageBoxW(0, "Scraping", "Concluído!", 1)
 # CONTROLE
 print(scraping)
 
-"""# Filtrar e exportar resultado
+# Filtrar e exportar resultado
 
 ## Preparação relatório desdobramentos
-"""
-
-
 
 # Tratamento base de dados — desdobramentos
 desdobramentos = pd.read_excel('relatorio_desdobramentos.xlsx')
@@ -190,6 +189,7 @@ desdobramentos.drop(axis=0, index=[0, 1, 2], inplace=True)
 
 
 def atualiza_base_de_dados():
+    print('Atualizando base de dados...')
     pastas_unicas = set(desdobramentos['Pasta do processo'])
     nova_pasta = []
     for unico in pastas_unicas:
@@ -199,14 +199,19 @@ def atualiza_base_de_dados():
 
         else:
             nova_pasta.append((unico + '.' + str(numero), unico))
+    print('Base de dados atualizada!')
     return nova_pasta
 
 
 # Atualiza Base de Dados
 novas_pastas = atualiza_base_de_dados()
 novas_pastas = pd.DataFrame(novas_pastas, columns=['Nova Pasta', 'Pasta'])
-print('pastas novas: ', novas_pastas)
-resultado_scraping = pd.read_excel('PROCESSOS ATUALIZADOS.xlsx')
+print('Pastas novas: ', novas_pastas)
+
+
+# VARIÁVEL PARA TESTES SEM PRECISAR AGUARDAR NOVAMENTE O SCRAPING
+# scraping = pd.read_excel('PROCESSOS ATUALIZADOS.xlsx')
+
 
 """## Consultar base de dados"""
 
@@ -224,7 +229,7 @@ for proc_format in scraping['Processo Formatado']:
 
         if originario in list(desdobramentos['Número CNJ']) and proc_format not in list(desdobramentos['Número CNJ']):
             consulta_originario_no_principal.append((desdobramentos.loc[indice_originario_principal[0],'Pasta deste desdobramento'][:-3],
-                                                     novas_pastas['Nova Pasta'](indice_pasta[0]),
+                                                     novas_pastas['Nova Pasta'][indice_pasta[0]],
                                                      scraping['Número antigo'][indice_principal[0]],
                                                      scraping['Processo Formatado'][indice_principal[0]],
                                                      'AJUSTAR',
