@@ -50,7 +50,8 @@ def ler_inicial():
 
     # Tratamento do cpf
     posterior_cpf = parsed.split('CPF')[1]
-    resultado_cpf = posterior_cpf[4:18]
+    virgula_cpf = posterior_cpf.split(',')[0]
+    resultado_cpf = virgula_cpf[4:]
     resultado_cpf = ''.join(resultado_cpf.split('.'))
     resultado_cpf = ''.join(resultado_cpf.split('-'))
 
@@ -154,12 +155,14 @@ for linha in servidores.iterrows():
 
     Select(navegador.find_element(by=By.ID, value='selNumCodCompetencia')).select_by_value('127')
 
-    proxima_pagina = navegador.find_element(by=By.ID, value='btnSalvar')
-    sleep(1)
+    try:
+        navegador.implicitly_wait(4)
+        clica_xpath(navegador, '//*[@id="backTop"]')  # PRÓXIMA PÁGINA
+        navegador.implicitly_wait(60)
+    except:
+        pass
 
-    clica_xpath(navegador, '//*[@id="backTop"]')  # PRÓXIMA PÁGINA
     sleep(0.7)
-
     navegador.find_element(by=By.ID, value='btnSalvar').click()
 
     # TERCEIRA PÁGINA DE PARÂMETROS
