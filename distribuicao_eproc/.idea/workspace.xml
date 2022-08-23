@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a0518fdd-7a2b-4f30-8670-162d276785ac" name="Changes" comment="misc">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servidores.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/distribuicao_blumenau.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/distribuicao_blumenau.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/warn-distribuicao_blumenau.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/warn-distribuicao_blumenau.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/distribuicao_blumenau.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/distribuicao_blumenau.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DUqjSUC287JSresFZomzFU9ypU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Administrador/Documents/GitHub/Spainer/distribuicao_eproc",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrador\Documents\GitHub\Spainer\distribuicao_eproc" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="distribuicao_eproc" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0518fdd-7a2b-4f30-8670-162d276785ac" name="Changes" comment="" />
+      <created>1660764145331</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660764145331</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Refatoração e novas funcionalidades. Versão 0.1">
+      <created>1660935649587</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1660935649587</updated>
+    </task>
+    <task id="LOCAL-00002" summary="misc">
+      <created>1660962693120</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1660962693120</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Refatoração e novas funcionalidades. Versão 0.1" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
+  </component>
+</project>
