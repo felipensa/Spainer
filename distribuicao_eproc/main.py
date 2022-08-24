@@ -51,7 +51,7 @@ def ler_inicial():
     # Tratamento do cpf
     posterior_cpf = parsed.split('CPF')[1]
     virgula_cpf = posterior_cpf.split(',')[0]
-    resultado_cpf = virgula_cpf[4:]
+    resultado_cpf = virgula_cpf[-14:]
     resultado_cpf = ''.join(resultado_cpf.split('.'))
     resultado_cpf = ''.join(resultado_cpf.split('-'))
 
@@ -95,25 +95,25 @@ assunto = 'REAJUSTES DE REMUNERAÇÃO, PROVENTOS OU PENSÃO'
 # INPUT DE DADOS
 servidores = pd.read_excel('Servidores.xlsx')
 
+# NAVEGADOR
+navegador = webdriver.Chrome(ChromeDriverManager().install())
+navegador.implicitly_wait(60)
+actions = ActionChains(navegador)
+link = 'https://eproc1g.tjsc.jus.br/eproc/'
+
+# ACESSO AO LOGIN
+navegador.get(url=link)
+
+navegador.find_element(by=By.ID, value='txtUsuario').send_keys(login)  # CAMPO LOGIN
+navegador.find_element(by=By.ID, value='pwdSenha').send_keys(senha)  # CAMPO SENHA
+sleep(0.5)
+navegador.find_element(by=By.ID, value='sbmEntrar').click()  # ACESSA PELO LOGIN
+
 # ITERAÇÃO POR LINHA DO ARQUIVO SERVIDORES
 for linha in servidores.iterrows():
     cliente = linha[1]['Nome do cliente']
     documentos = rf'O:\{cliente[0]}\{cliente}\Hora-atividade\Cumprimento de sentença'
     cpf, valor_acao = ler_inicial()
-
-    # NAVEGADOR
-    navegador = webdriver.Chrome(ChromeDriverManager().install())
-    navegador.implicitly_wait(60)
-    actions = ActionChains(navegador)
-    link = 'https://eproc1g.tjsc.jus.br/eproc/'
-
-    # ACESSO AO LOGIN
-    navegador.get(url=link)
-
-    navegador.find_element(by=By.ID, value='txtUsuario').send_keys(login)  # CAMPO LOGIN
-    navegador.find_element(by=By.ID, value='pwdSenha').send_keys(senha)  # CAMPO SENHA
-    sleep(0.5)
-    navegador.find_element(by=By.ID, value='sbmEntrar').click()  # ACESSA PELO LOGIN
 
     # PRIMEIRA PÁGINA DE PARÂMETROS
     clica_xpath(navegador, '//*[@id="main-menu"]/li[10]/a')  # DISTRIBUIR INICIAL
@@ -204,6 +204,7 @@ for linha in servidores.iterrows():
     controle_erro = ''
     cont = 1
     nomes_arquivos = []
+    documentos = Path(documentos)
     for i in Path.iterdir(documentos):
         if str(i)[-3:] == 'pdf':
             if cont > 1:
@@ -219,17 +220,20 @@ for linha in servidores.iterrows():
     # CLASSIFICA OS DOCUMENTOS
     def classificacao_docs():
         # CLASSIFICA TODOS OS ARQUIVOS
-        if '5 RG.pdf' in nomes_arquivos:
-            lista = ['PETIÇÃO INICIAL', 'CÁLCULO', 'CÁLCULO', 'TÍTULO EXECUTIVO JUDICIAL', 'IDENTIDADE']
+        if '8 RG.pdf' in nomes_arquivos:
+            lista = ['PETIÇÃO INICIAL', 'CÁLCULO', 'CÁLCULO', 'TÍTULO EXECUTIVO JUDICIAL', 'FICHA FINANCEIRA',
+                     'PROCURAÇÃO', 'SUBSTABELECIMENTO', 'IDENTIDADE']
             tipos_com_id = {'PETIÇÃO INICIAL': '1', 'CÁLCULO': '4', 'TÍTULO EXECUTIVO JUDICIAL': '175',
-                            'IDENTIDADE': '8'}
+                            'FICHA FINANCEIRA': '39', 'PROCURAÇÃO': '2', 'SUBSTABELECIMENTO': '26', 'IDENTIDADE': '8'}
             for x in range(1, len(lista) + 1):
                 js_code = f"document.getElementById('selTipoArquivo_{x}').value = '{tipos_com_id[lista[x - 1]]}'"
                 navegador.execute_script(js_code)
                 sleep(1)
         else:
-            lista = ['PETIÇÃO INICIAL', 'CÁLCULO', 'CÁLCULO', 'TÍTULO EXECUTIVO JUDICIAL']
-            tipos_sem_id = {'PETIÇÃO INICIAL': '1', 'CÁLCULO': '4', 'TÍTULO EXECUTIVO JUDICIAL': '175'}
+            lista = ['PETIÇÃO INICIAL', 'CÁLCULO', 'CÁLCULO', 'TÍTULO EXECUTIVO JUDICIAL', 'FICHA FINANCEIRA',
+                     'PROCURAÇÃO', 'SUBSTABELECIMENTO']
+            tipos_sem_id = {'PETIÇÃO INICIAL': '1', 'CÁLCULO': '4', 'TÍTULO EXECUTIVO JUDICIAL': '175',
+                            'FICHA FINANCEIRA': '39', 'PROCURAÇÃO': '2', 'SUBSTABELECIMENTO': '26'}
             for x in range(1, len(tipos_sem_id) + 1):
                 js_code = f"document.getElementById('selTipoArquivo_{x}').value = '{tipos_sem_id[lista[x - 1]]}'"
                 navegador.execute_script(js_code)
@@ -251,4 +255,49 @@ for linha in servidores.iterrows():
     except TimeoutException:
         classificacao_docs()
 
-    msgbox("Confira os dados e documentos antes de finalizar a distribuição!")
+    msgbox("Confira os dados e documentos antes de finalizar a distribuição. Antes de aceitar este alerta,"
+           "finalize a distribuição e aguarde o site voltar para a página inicial.!")
+
+    navegador.maximize_window()
+
+    try:
+        clica_xpath(navegador, '//*[@id="backTop"]')
+    except:
+        pass
+
+    sleep(1.5)
+
+    clica_xpath(navegador, '//*[@id="btnSalvar"]')
+    sleep(2)
+
+    iframe = navegador.find_element(by=By.XPATH, value='//*[@id="ifrSubFrm"]')
+    navegador.switch_to.frame(iframe)
+    clica_xpath(navegador, '//*[@id="sbmConfirmar"]')
+
+    navegador.switch_to.default_content()
+
+    iframe = navegador.find_element(by=By.XPATH, value='//*[@id="ifrSubFrm"]')
+    navegador.switch_to.frame(iframe)
+    element = navegador.find_element(by=By.XPATH, value='//*[@id="btnFechar"]')
+    actions.move_to_element(element).click().perform()
+    navegador.switch_to.default_content()
+
+    # clica_xpath(navegador, '//*[@id="btnImprimir"]')
+
+    texto_extrato = navegador.find_element(by=By.XPATH, value='/html/body/script[50]').text
+    texto_extrato = texto_extrato.split('processo_extrato_distribuicao&hash=')[1]
+    texto_extrato = texto_extrato.split(',')[0]
+    print(texto_extrato)
+
+    navegador.get(f'https://eproc1g.tjsc.jus.br/eproc/controlador.php?acao=processo_extrato_distribuicao&hash={texto_extrato}')
+    sleep(4)
+
+    with open("page_source.html", "w") as f:
+        f.write(navegador.page_source)
+
+    navegador.switch_to.alert.dismiss()
+    msgbox('teste')
+
+
+
+

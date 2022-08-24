@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0518fdd-7a2b-4f30-8670-162d276785ac" name="Changes" comment="misc">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Servidores.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/EXE-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/PKG-00.toc" afterDir="false" />
@@ -12,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/base_library.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/distribuicao_blumenau.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/distribuicao_blumenau.pkg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/warn-distribuicao_blumenau.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/warn-distribuicao_blumenau.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribuicao_blumenau/xref-distribuicao_blumenau.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribuicao_blumenau/xref-distribuicao_blumenau.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/distribuicao_blumenau.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/distribuicao_blumenau.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -32,14 +32,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Administrador/Documents/GitHub/Spainer/distribuicao_eproc",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrador/Documents/GitHub/Spainer/distribuicao_eproc&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrador\Documents\GitHub\Spainer\distribuicao_eproc" />
