@@ -9,44 +9,41 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 
-def conversao_excel(navegador, matricula, pasta_downloads, pasta_inicial, nome):
+def conversao_excel(navegador, matricula, pasta_downloads, pasta_fichas):
+    print('Convertendo fichas financeiras consolidadas...')
     # ACESSA A PÁGINA DO ADOBE
     link = 'https:/www.adobe.com/br/acrobat/online/pdf-to-excel.html'
     navegador.get(url=link)
     sleep(5)
 
-    # PEDE O ARQUIVO DE INPUT
-    navegador.find_element(by=By.XPATH, value='//*[@id="lifecycle-nativebutton"]').click()
-    sleep(5)
+    # INPUT DO ARQUIVO CONSOLIDADO
+    navegador.find_element(by=By.XPATH, value='//*[@id="fileInput"]').send_keys(str(pasta_fichas)
+                                                                                + rf'\fichas_financeiras {matricula}.pdf')
 
-    # INFORMA O ARQUIVO E ORDENA CONVERSÃO
-    caminho = str(pasta_inicial) + rf'\Fichas {matricula} - {nome}'
-    pyautogui.write(caminho)
-    pyautogui.press('Enter')
-    sleep(2)
-    pyautogui.write('fichas_financeiras ' + matricula + '.pdf')
-    pyautogui.press('Enter')
-    sleep(1)
+    sleep(5)
 
     # ESPERA CLASS APARECER
     wait_for_element = 60  # ESPERA TIMEOUT EM SEGUNDOS
     try:
         WebDriverWait(navegador, wait_for_element).until(
-            EC.element_to_be_clickable((By.CLASS_NAME,
-                                        "spectrum-Button spectrum-Button--cta "
-                                        "DownloadOrShare__downloadButton___3z1LR")))
+            EC.element_to_be_clickable((By.XPATH,
+                                        '//*[@id="dc-hosted-ec386752"]/div/div/div[2]/div'
+                                        '/section[1]/div/div/div[2]/div[1]/button[1]')))
+        print('Botão de download clicável...')
+
     except TimeoutException as e:
-        print("Wait Timed out")
+        print("Tempo de espera expirado...")
 
     # DOWNLOAD
-    navegador.find_element(by=By.XPATH, value='//*[@id="dc-hosted-ec386752"]/div/'
-                                              'div/div[2]/div/section[2]/div/div[1]/div[2]/button[1]').click()
+    navegador.find_element(by=By.XPATH, value='//*[@id="dc-hosted-ec386752"]/div/div/div[2]/div'
+                                              '/section[1]/div/div/div[2]/div[1]/button[1]').click()
     sleep(5)
 
     # MOVE ARQUIVO DE DOWNLOADS PARA PASTA ADEQUADA
-    shutil.move(str(pasta_downloads) + fr"\fichas_financeiras {matricula}.xlsx",
-                str(pasta_inicial) + fr"\Fichas {matricula} - {nome}" + fr'\fichas_financeiras {matricula}.xlsx')
+    shutil.move(pasta_downloads + fr"\fichas_financeiras {matricula}.xlsx",
+                str(pasta_fichas) + fr'\fichas_financeiras {matricula}.xlsx')
 
+    print('Conversão finalizada!')
     navegador.quit()
 
     return 1
